@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Video klub</title>
+        <link rel="stylesheet" type="text/css" href="style.css" />
+        <meta charset="utf-8"/>
+        <script>
+
+            var filmovi = function()
+            {
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = podaci;
+                xhttp.open("GET","/filmovi",true);
+                xhttp.send();
+            }
+
+            var podaci = function()
+            {
+                if(this.readyState == 4 && this.status == 200)
+                {
+                    //alert(this.responseText);
+                    var stavke = JSON.parse(this.responseText);
+                    var paragraf = document.getElementById("prikazFilmova");
+                    var html = "";
+                    for(var i = 0; i < stavke.length; i++)
+                    {
+                        
+                        html +="<div class='film'>";
+                        html +="<h2>"+stavke[i].naziv+" </h2><b>Zanr:</b> "+stavke[i].zanr+"<br><br><b>Trajanje: </b>"+stavke[i].trajanje+"min.<br><br><b>Cena: </b>"+stavke[i].cena+"din.<br/><br>"; 
+                        html +="<img class='slika' src='img/"+stavke[i].naziv+".jpg' width='123' height='185'/> <bR><br><br><bR><br><br><bR>"
+                       // html +="<input type='button' value='Gledaj film' onclick='gledaj("+stavke[i].id + ")'/>";
+                        html += "<a href='/gledaj?id="+stavke[i].id + "' class='gledajFilmLink'>Gledaj film</a>";
+                        html+= "</div>";    
+                            
+                            
+                    } 
+                    paragraf.innerHTML = html;
+                }
+            }
+
+            function gledaj(idFilma)
+            {
+                alert("Trazeni film je " + idFilma);
+            }
+        </script>
+    </head>
+    <body onload="filmovi()">
+        <div id="navigation">
+            <ul id="menu">
+                <li><a href="index.html">Filmovi</a></li>
+                <li><a href="registration.html">Registracija/Prijava</a></li>
+                <li><a href="profil.html">Profil</a></li>
+            </ul>
+        </div>
+
+
+        <div id="header">
+            <h1>Video klub</h1>
+            
+        </div>    
+        
+        <div id="telo">
+            <h1>Prikaz filmova</h1>
+            <div id="prikazFilmova">
+
+            </div>
+        </div>
+
+        <footer id="footer">
+           <p>Copyright &copy; 2020 <a href="https://www.linkedin.com/in/tomislav-baki%C4%87-1a7a5b197/">Tomislav Bakic</a> Faculty of Natural Science, University of Kragujevac</p> 
+        </footer>
+    </body>
+</html>

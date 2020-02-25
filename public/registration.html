@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Registracija</title>
+        <link rel="stylesheet" type="text/css" href="style.css" />
+        <meta charset="utf-8"/>
+        <script>
+        </script>
+    </head>
+    <body>
+        <div id="navigation">
+            <ul id="menu">
+                <li><a href="index.html">Filmovi</a></li>
+                <li><a href="registration.html">Registracija/Prijava</a></li>
+                <li><a href="profil.html">Profil</a></li>
+            </ul>
+        </div>
+
+
+        <div id="header">
+            <h1>Video klub</h1>
+            
+        </div>   
+        <div id="reg_log"> 
+            <div class='reg'>
+                <h2 style="margin-bottom: 0px;">Registracija </h2>
+                <h4 style="margin-top: 5px;">Ukoliko nemate profil.</h4>
+                <form action="registracija" method="get">
+                    Korisnicko ime:   &nbsp;&nbsp;&nbsp;
+                    <input type="text" name="username"> <br><br> 
+                    Lozinka: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+                    <input type="text" name="pass"> <br><br>
+                    
+                    <input type="submit" value="Registruj se" id="submit"/>
+
+                </form>
+            </div>
+            <div class='reg'>
+                <h2 style="margin-bottom: 0px;">Prijava</h2>
+                <h4 style="margin-top: 5px;">Ukoliko imate profil.</h4>
+                <form action="prijava" method="get">
+                    Korisnicko ime:   &nbsp;&nbsp;&nbsp;
+                    <input type="text" name="usernameLogin"> <br><br> 
+                    Lozinka: &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; 
+                    <input type="text" name="passLogin"> <br><br>
+                    <input type="submit" value="Prijavi se" id="submit"/>
+                </form>
+            </div>
+        </div>
+         
+            <footer id="footer">
+            <p>Copyright &copy; 2020 <a href="https://www.linkedin.com/in/tomislav-baki%C4%87-1a7a5b197/">Tomislav Bakic</a> Faculty of Natural Science, University of Kragujevac</p> 
+         </footer>
+    </body>
+</html>

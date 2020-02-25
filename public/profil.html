@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Profil</title>
+        <link rel="stylesheet" type="text/css" href="style.css" />
+        <meta charset="utf-8"/>
+        <script>
+              var profil = function()
+            {
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = podaci;
+                xhttp.open("GET","/profil",true);
+                xhttp.send();
+            }
+
+            var podaci = function()
+            {
+                if(this.readyState == 4 && this.status == 200)
+                {
+                    var korisnik = JSON.parse(this.responseText);
+                    var ime = document.getElementById("profil_ime");
+                    var novac = document.getElementById("profil_novac");
+                    ime.innerText = korisnik[0].username;
+                    novac.innerText = korisnik[0].novac;
+                    if(korisnik[0].novac < 400)
+                        document.getElementById("error").innerHTML = "<p style='color:red;font-weight:bold;'> Nemate dovoljno novca na racunu da bi gledali film. </p>";
+                    document.getElementById("stanje").value = parseFloat(korisnik[0].novac);
+                }
+            }
+
+            var filmoviKorisnika = function()
+            {
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function()
+            {
+                if(this.readyState == 4 && this.status == 200)
+                {
+                    var filmovi = JSON.parse(this.responseText);
+                    var lista = document.getElementById("odgledaniFilmovi");
+                
+                
+                    html = "<ul>";
+                    filmovi.forEach(element => {
+                        html += "<li style='color:blue;font-weight:bold;'>" + element.naziv + "</li>";
+                    });
+                    html += "</ul>";
+                    lista.innerHTML = html;
+                    
+                }
+            }
+                xhttp.open("GET","/odgledano",true);
+                xhttp.send();
+            }
+
+
+            function obrisiProfil()
+            {
+               window.location = "/obrisiProfil";
+            }
+        </script>
+    </head>
+    <body onload="profil();filmoviKorisnika()">
+        <div id="navigation">
+            <ul id="menu">
+                <li><a href="index.html">Filmovi</a></li>
+                <li><a href="registration.html">Registracija/Prijava</a></li>
+                <li><a href="profil.html">Profil</a></li>
+            </ul>
+        </div>
+        <div id="header">
+            <h1>Video klub</h1>
+        </div>  
+        
+
+        <div id="profil">
+
+            <h2>
+                Prikaz profila clana video kluba
+            </h2>
+            Korisnicko ime: <i><span id="profil_ime"></span></i><br><br>
+            Stanje na racunu: <span id="profil_novac"></span><br><br>
+
+           <h3> Odgledani filmovi:</h3>
+            <div id="odgledaniFilmovi">
+
+            </div>
+
+            <br><br>
+
+            <form action="uplatiNovac" method="get">
+                <input type="shortint" id="stanje" name="stanje" style="visibility: hidden;" /><br>
+                <div id="error"></div>
+                <input type="shortint" name="kolicinaZaUplatu"/>
+                <input type="submit" value="Uplati novac"/>
+                
+            </form>            
+           
+            <br>
+            <button id="obrisiProfil" onclick="obrisiProfil()" >Obrisi profil</button>
+        </div>
+
+
+
+         <footer id="footer">
+            <p>Copyright &copy; 2020 <a href="https://www.linkedin.com/in/tomislav-baki%C4%87-1a7a5b197/">Tomislav Bakic</a> Faculty of Natural Science, University of Kragujevac</p> 
+         </footer>
+    </body>
+</html>
